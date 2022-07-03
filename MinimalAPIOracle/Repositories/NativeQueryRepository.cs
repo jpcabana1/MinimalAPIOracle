@@ -7,7 +7,7 @@ namespace MinimalAPIOracle.Repositories
 {
     public class NativeQueryRepository
     {
-        private ModelContext _modelContext;
+        private readonly ModelContext _modelContext;
 
         string _queryProductDetails = "SELECT "
                             + "    cus.customer_id, "

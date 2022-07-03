@@ -9,7 +9,6 @@ namespace MinimalAPIOracle.Config
         {
         }
 
-
         public DbSet<Countries> Countries { get; set; }
     }
 }

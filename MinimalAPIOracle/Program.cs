@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MinimalAPIOracle.Config;
+using MinimalAPIOracle.Models;
 using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,20 +9,19 @@ builder.Services.AddSwaggerGen();
 
 string StrConEnv = builder.Configuration.GetConnectionString("XEPDB1");
 
-builder.Services.AddDbContext<Contexto>
+builder.Services.AddDbContext<ModelContext>
     (options => options.UseOracle(StrConEnv));
-
 
 var app = builder.Build();
 app.UseSwagger();
 
 
-app.MapGet("Countries",async (Contexto contexto) =>
+app.MapGet("Countries",async (ModelContext contexto) =>
 {
      return await contexto.Countries.ToListAsync();
 });
 
-app.MapGet("Products", async (Contexto contexto) =>
+app.MapGet("Products", async (ModelContext contexto) =>
 {
     using (var command = contexto.Database.GetDbConnection().CreateCommand())
     {

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MinimalAPIOracle.Models;
 
-namespace MinimalAPIOracle.Models
+namespace MinimalAPIOracle.Config
 {
     public partial class ModelContext : DbContext
     {
@@ -36,7 +37,7 @@ namespace MinimalAPIOracle.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseOracle("Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=GabinatorMobile)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=XEPDB1)));User Id=jpcabana;Password=otis2016;");
+                optionsBuilder.UseOracle("Name=XEPDB1");
             }
         }
 

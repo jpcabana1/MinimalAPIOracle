@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MinimalAPIOracle.Models;
 
-namespace MinimalAPIOracle.Models
+namespace MinimalAPIOracle.Config
 {
     public partial class ModelContext : DbContext
     {
@@ -36,7 +37,7 @@ namespace MinimalAPIOracle.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseOracle("XEPDB1");
+                optionsBuilder.UseOracle("Name=XEPDB1");
             }
         }
 

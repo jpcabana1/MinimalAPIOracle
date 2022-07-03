@@ -2,6 +2,7 @@
 using MinimalAPIOracle.Config;
 using MinimalAPIOracle.Models;
 using System.Data;
+using System.Data.Common;
 
 namespace MinimalAPIOracle.Repositories
 {
@@ -9,7 +10,7 @@ namespace MinimalAPIOracle.Repositories
     {
         private readonly ModelContext _modelContext;
 
-        string _queryProductDetails = "SELECT "
+        readonly string _queryProductDetails = "SELECT "
                             + "    cus.customer_id, "
                             + "    ord.order_id, "
                             + "    ord.status,"
@@ -34,33 +35,36 @@ namespace MinimalAPIOracle.Repositories
         {
 
             List<ProductDetailsDAO> products = new List<ProductDetailsDAO>();
-            using (var command = _modelContext.Database.GetDbConnection().CreateCommand())
+            using (DbCommand command = _modelContext.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = _queryProductDetails;
                 command.CommandType = CommandType.Text;
                 _modelContext.Database.OpenConnection();
 
-                using (var result = await command.ExecuteReaderAsync())
+                using (DbDataReader result = await command.ExecuteReaderAsync())
                 {
-                    var dataTable = new DataTable();
+                    DataTable dataTable = new DataTable();
                     dataTable.Load(result);
-
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        ProductDetailsDAO product = new ProductDetailsDAO();
-                        product.CustomerId = (decimal)row["customer_id"];
-                        product.OrderId = (decimal)row["order_id"];
-                        product.Status = (string)row["status"];
-                        product.UnitPrice = (double)row["unit_price"];
-                        product.Quantity = (double)row["quantity"];
-                        product.Description = (string)row["description"];
-                        products.Add(product);                       
+                        products.Add(ExtrackProductDetails(row));
                     }
                 }
             }
             return products;
         }
 
-     
+        private ProductDetailsDAO ExtrackProductDetails(DataRow row)
+        {
+            ProductDetailsDAO product = new ProductDetailsDAO();
+            product.CustomerId = (decimal)row["customer_id"];
+            product.OrderId = (decimal)row["order_id"];
+            product.Status = (string)row["status"];
+            product.UnitPrice = (double)row["unit_price"];
+            product.Quantity = (double)row["quantity"];
+            product.Description = (string)row["description"];
+            return product;
+        }
+
     }
 }

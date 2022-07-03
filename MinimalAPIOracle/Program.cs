@@ -19,7 +19,7 @@ app.UseSwagger();
 
 app.MapGet("Countries", async (ModelContext contexto) => await contexto.Countries.ToListAsync());
 
-app.MapGet("Products", (NativeQueryRepository repository) => repository.GetProductDetails());
+app.MapGet("Products", async (NativeQueryRepository repository) => await repository.GetProductDetails());
 
 app.UseSwaggerUI();
 app.Run();

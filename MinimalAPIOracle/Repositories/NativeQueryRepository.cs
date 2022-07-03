@@ -30,7 +30,7 @@ namespace MinimalAPIOracle.Repositories
             _modelContext = modelContext;
         }
 
-        public ICollection<ProductDetailsDAO> GetProductDetails()
+        public async Task<ICollection<ProductDetailsDAO>> GetProductDetails()
         {
 
             List<ProductDetailsDAO> products = new List<ProductDetailsDAO>();
@@ -40,7 +40,7 @@ namespace MinimalAPIOracle.Repositories
                 command.CommandType = CommandType.Text;
                 _modelContext.Database.OpenConnection();
 
-                using (var result = command.ExecuteReader())
+                using (var result = await command.ExecuteReaderAsync())
                 {
                     var dataTable = new DataTable();
                     dataTable.Load(result);

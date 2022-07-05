@@ -38,8 +38,8 @@ namespace MinimalAPIOracle.Repositories
                 product.CustomerId = (decimal)row["customer_id"];
                 product.OrderId = (decimal)row["order_id"];
                 product.Status = (string)row["status"];
-                product.UnitPrice = (double)row["unit_price"];
-                product.Quantity = (double)row["quantity"];
+                product.UnitPrice = (decimal)row["unit_price"];
+                product.Quantity = (decimal)row["quantity"];
                 product.Description = (string)row["description"];
                 return product;
             };
@@ -56,8 +56,8 @@ namespace MinimalAPIOracle.Repositories
                 product.CustomerId = (decimal)row["customer_id"];
                 product.OrderId = (decimal)row["order_id"];
                 product.Status = (string)row["status"];
-                product.UnitPrice = (double)row["unit_price"];
-                product.Quantity = (double)row["quantity"];
+                product.UnitPrice = (decimal)row["unit_price"];
+                product.Quantity = (decimal)row["quantity"];
                 product.Description = (string)row["description"];
                 return product;
             };

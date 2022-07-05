@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MinimalAPIOracle.Config;
-using MinimalAPIOracle.Repositories;
 using MinimalAPIOracle.Services;
 
 var builder = WebApplication.CreateBuilder(args);
